@@ -301,81 +301,127 @@
         }
         
         /* Experience Section */
-        .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .timeline::after {
-            position: absolute;
-            width: 2px;
-            background-color: var(--medium-gray);
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -1px;
-        }
-        
-        .timeline-item {
-            padding: 10px 40px;
-            position: relative;
-            width: 50%;
-            animation: fadeInUp 1s;
-        }
-        
-        .timeline-item::after {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: var(--white);
-            border: 4px solid var(--primary-color);
-            border-radius: 50%;
-            top: 15px;
-            z-index: 1;
-        }
-        
-        .left {
-            left: 0;
-        }
-        
-        .right {
-            left: 50%;
-        }
-        
-        .left::after {
-            right: -10px;
-        }
-        
-        .right::after {
-            left: -10px;
-        }
-        
-        .timeline-content {
-            padding: 20px;
-            background-color: var(--white);
-            border-radius: 5px;
-            box-shadow: var(--box-shadow);
-            transition: var(--transition);
-        }
-        
-        .timeline-content:hover {
-            transform: translateY(-5px);
-        }
-        
-        .timeline-content h3 {
-            margin-bottom: 10px;
-            color: var(--secondary-color);
-        }
-        
-        .timeline-content h4 {
-            color: var(--primary-color);
-            margin-bottom: 10px;
-        }
-        
-        .timeline-content p {
-            margin-bottom: 0;
-        }
+#experience {
+    background: #f4f4f4;
+    padding: 60px 0;
+}
+
+.section-title h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 60px;
+    color: #333;
+}
+
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    background-color: #ccc;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.timeline-item {
+    position: relative;
+    width: 50%;
+    padding: 30px 40px;
+}
+
+.timeline-item.left {
+    left: 0;
+}
+
+.timeline-item.right {
+    left: 50%;
+}
+
+/* Drag Ring Effect */
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 4px solid #FF6F61;
+    background: #fff;
+    top: 20px;
+    right: -10px;
+    border-radius: 50%;
+    z-index: 2;
+    transition: transform 0.3s ease;
+}
+
+.timeline-item.right::before {
+    left: -10px;
+    right: auto;
+}
+
+.timeline-item:hover::before {
+    transform: scale(1.3);
+}
+
+.timeline-content {
+    background: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.timeline-content h3 {
+    margin-bottom: 5px;
+    font-size: 1.4rem;
+    color: #FF6F61;
+}
+
+.timeline-content h4 {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    color: #777;
+}
+
+.timeline-content p {
+    font-size: 0.95rem;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .timeline::after {
+        left: 20px;
+    }
+
+    .timeline-item {
+        width: 100%;
+        padding-left: 50px;
+        padding-right: 25px;
+        margin-bottom: 30px;
+    }
+
+    .timeline-item.right {
+        left: 0;
+    }
+
+    .timeline-item::before {
+        left: 10px;
+        right: auto;
+    }
+}
+
         
         /* Skills Section */
         #skills {
@@ -791,31 +837,50 @@
         </div>
     </section>
 
-    <!-- Experience Section -->
     <section id="experience">
-        <div class="container">
-            <div class="section-title">
-                <h2>Experience</h2>
-            </div>
-            <div class="timeline">
-                <div class="timeline-item left">
-                    <div class="timeline-content">
-  <h3>Support Analyst</h3>
-  <h4>
-    Keyloop, Hyderabad<br>
-    <span style="font-weight: normal; color: #666;">June 2023 - Present</span>
-  </h4>
-  <p>
-    Managed and optimized customer experience by efficiently handling customer details and directing them to various dealerships across the UK.<br>
-    Developed a real-time chat application using Django, enabling seamless communication between customers and dealerships across the UK.<br>
-    Facilitated enhanced customer engagement through an interactive platform that supports smooth and effective interaction between customers and dealerships.
-  </p>
-</div>
+    <div class="container">
+        <div class="section-title">
+            <h2>Experience</h2>
+        </div>
+        <div class="timeline">
 
+            <!-- Support Analyst -->
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <h3>Support Analyst</h3>
+                    <h4>
+                        Keyloop, Hyderabad<br>
+                        <span style="font-weight: normal; color: #666;">June 2023 – Present</span>
+                    </h4>
+                    <p>
+                        Managed and optimized customer experience by efficiently handling customer details and directing them to various dealerships across the UK.<br>
+                        Developed a real-time chat application using Django, enabling seamless communication between customers and dealerships across the UK.<br>
+                        Facilitated enhanced customer engagement through an interactive platform that supports smooth and effective interaction between customers and dealerships.
+                    </p>
                 </div>
             </div>
+
+            <!-- Delivery Partner -->
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <h3>Delivery Partner (Part-Time)</h3>
+                    <h4>
+                        Rapido – Hyderabad, Telangana<br>
+                    </h4>
+                    <p>
+                        Worked part-time during free hours as a delivery partner, demonstrating strong self-discipline and time management.<br>
+                        Delivered food, groceries, and packages efficiently across the city while ensuring timely service and customer satisfaction.<br>
+                        Demonstrated strong time management and route optimization skills to consistently meet delivery targets.<br>
+                        Managed deliveries during peak hours and adverse weather conditions, highlighting reliability and adaptability.<br>
+                        Ensured high customer satisfaction through clear communication, courteous service, and quick issue resolution.
+                    </p>
+                </div>
+            </div>
+
         </div>
-    </section>
+    </div>
+</section>
+
 
     <!-- Skills Section -->
     <section id="skills">
