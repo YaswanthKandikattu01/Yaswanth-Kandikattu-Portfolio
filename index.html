@@ -9,6 +9,75 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <style>
+/* Welcome Overlay Styles */
+#welcome-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 10, 10, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5000;
+  backdrop-filter: blur(10px);
+}
+
+.welcome-box {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem 3rem;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  animation: fadeIn 1s ease-in-out;
+}
+
+.welcome-box h2 {
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.welcome-box p {
+  color: #ccc;
+  margin-bottom: 1rem;
+}
+
+.welcome-box input {
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid #667eea;
+  width: 100%;
+  margin-bottom: 1rem;
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+}
+
+.welcome-box input::placeholder {
+  color: #bbb;
+}
+
+.welcome-box button {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.welcome-box button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(118,75,162,0.5);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9);}
+  to { opacity: 1; transform: scale(1);}
+}
+
     /* Reset and Base Styles */
 * {
     margin: 0;
@@ -1059,6 +1128,18 @@ section {
 }
 </style>
 <body>
+    <!-- Welcome Overlay -->
+  <div id="welcome-overlay">
+    <div class="welcome-box">
+      <h2>👋 Welcome!</h2>
+      <p>Please enter your name to continue:</p>
+      <form id="welcome-form" action="https://formspree.io/f/xpwwwelw" method="POST">
+        <input type="text" name="visitor_name" placeholder="Your Name" required>
+        <button type="submit">Enter</button>
+      </form>
+      <p id="welcome-status"></p>
+    </div>
+  </div>
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
@@ -1572,6 +1653,39 @@ section {
     </footer>
 
     <script src="script.js"></script>
+<script>
+  const welcomeForm = document.getElementById("welcome-form");
+  const welcomeOverlay = document.getElementById("welcome-overlay");
+  const welcomeStatus = document.getElementById("welcome-status");
+
+  welcomeForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    welcomeStatus.innerHTML = "⏳ Please wait...";
+
+    try {
+      const response = await fetch(welcomeForm.action, {
+        method: welcomeForm.method,
+        body: new FormData(welcomeForm),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        welcomeStatus.style.color = "lightgreen";
+        welcomeStatus.innerHTML = "✅ Welcome!";
+        setTimeout(() => {
+          welcomeOverlay.style.display = "none";
+        }, 1000);
+      } else {
+        welcomeStatus.style.color = "red";
+        welcomeStatus.innerHTML = "❌ Something went wrong.";
+      }
+    } catch (error) {
+      welcomeStatus.style.color = "red";
+      welcomeStatus.innerHTML = "⚠️ Network error!";
+    }
+  });
+</script>
+
 </body>
 <script>
     // Smooth scrolling for navigation links
@@ -1750,6 +1864,3 @@ if (themeToggle) {
 }
 </script>
 </html>
-
-
-
