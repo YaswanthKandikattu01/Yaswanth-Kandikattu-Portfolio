@@ -289,14 +289,42 @@ body {
 }
 
 .name {
-    display: block;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-weight: 700;
-    animation: glow 2s ease-in-out infinite alternate;
+  display: inline-block;
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  overflow: hidden;
 }
+
+/* Sparkle animation overlay */
+.name::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.8) 50%,
+    transparent 100%
+  );
+  animation: sparkle 3s infinite;
+}
+
+@keyframes sparkle {
+  0% {
+    left: -75%;
+  }
+  100% {
+    left: 125%;
+  }
+}
+
 
 @keyframes glow {
     from { text-shadow: 0 0 20px rgba(102, 126, 234, 0.5); }
@@ -1889,6 +1917,7 @@ if (themeToggle) {
 }
 </script>
 </html>
+
 
 
 
