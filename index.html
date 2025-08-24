@@ -1794,6 +1794,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Typing effect for hero title
     // Infinite typing effect for hero title
+// Infinite typing effect for hero title
 const nameElement = document.querySelector('.name');
 if (nameElement) {
   const originalText = "Yaswanth Kandikattu"; 
@@ -1809,13 +1810,16 @@ if (nameElement) {
       index--;
     }
 
-    let speed = isDeleting ? 100 : 180; // typing/deleting speed
-    if (index === originalText.length) {
-      speed = 2500; // pause before deleting
+    let speed = isDeleting ? 80 : 120; // typing/deleting speed
+
+    if (index === originalText.length + 1) {  
+      // ✅ wait after fully typing (including last 'u')
+      speed = 1500;
       isDeleting = true;
+      index = originalText.length; // keep full text before deleting
     } else if (index === 0 && isDeleting) {
       isDeleting = false;
-      speed = 700; // pause before typing again
+      speed = 500;
     }
 
     setTimeout(typeEffect, speed);
@@ -1823,6 +1827,7 @@ if (nameElement) {
 
   typeEffect();
 }
+
 
 });
 
@@ -1880,6 +1885,7 @@ if (themeToggle) {
 }
 </script>
 </html>
+
 
 
 
