@@ -1793,23 +1793,37 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Typing effect for hero title
-    const nameElement = document.querySelector('.name');
-    if (nameElement) {
-        const originalText = nameElement.textContent;
-        nameElement.textContent = '';
-        
-        let index = 0;
-        const typeText = () => {
-            if (index < originalText.length) {
-                nameElement.textContent += originalText.charAt(index);
-                index++;
-                setTimeout(typeText, 100);
-            }
-        };
-        
-        // Start typing effect after a delay
-        setTimeout(typeText, 1000);
+    // Infinite typing effect for hero title
+const nameElement = document.querySelector('.name');
+if (nameElement) {
+  const originalText = "Yaswanth Kandikattu"; 
+  let index = 0;
+  let isDeleting = false;
+
+  function typeEffect() {
+    if (!isDeleting && index <= originalText.length) {
+      nameElement.textContent = originalText.substring(0, index);
+      index++;
+    } else if (isDeleting && index >= 0) {
+      nameElement.textContent = originalText.substring(0, index);
+      index--;
     }
+
+    let speed = isDeleting ? 80 : 120; // typing/deleting speed
+    if (index === originalText.length) {
+      speed = 1500; // pause before deleting
+      isDeleting = true;
+    } else if (index === 0 && isDeleting) {
+      isDeleting = false;
+      speed = 500; // pause before typing again
+    }
+
+    setTimeout(typeEffect, speed);
+  }
+
+  typeEffect();
+}
+
 });
 
 // Smooth scroll polyfill for older browsers
@@ -1866,5 +1880,6 @@ if (themeToggle) {
 }
 </script>
 </html>
+
 
 
