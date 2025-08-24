@@ -1809,13 +1809,13 @@ if (nameElement) {
       index--;
     }
 
-    let speed = isDeleting ? 80 : 120; // typing/deleting speed
+    let speed = isDeleting ? 100 : 180; // typing/deleting speed
     if (index === originalText.length) {
-      speed = 1500; // pause before deleting
+      speed = 2500; // pause before deleting
       isDeleting = true;
     } else if (index === 0 && isDeleting) {
       isDeleting = false;
-      speed = 500; // pause before typing again
+      speed = 700; // pause before typing again
     }
 
     setTimeout(typeEffect, speed);
@@ -1880,6 +1880,7 @@ if (themeToggle) {
 }
 </script>
 </html>
+
 
 
 
